@@ -1,0 +1,31 @@
+{
+  "name": "lab_2",
+  "version": "1.0.0",
+  "description": "Lab #2 Node js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": " ",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/VladB1l/Node-lab2.git"
+  },
+  "author": "VladB1l",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladB1l/Node-lab2/issues"
+  },
+  "homepage": "https://github.com/VladB1l/Node-lab2#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.1",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
