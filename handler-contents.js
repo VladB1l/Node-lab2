@@ -2,10 +2,8 @@ import { promises as fsPromises } from 'fs';
 import handlerMethods from './handler-methods.js';
 
 const contentHandlers = {
-  'text/html': async (req, res, filename, method) => {
-    const filePath = `./${filename}`;
+  'text/html': async (req, res, htmlContent, method) => {
     try {
-      const htmlContent = await fsPromises.readFile(filePath, 'utf8');
       handlerMethods[method](req, res, htmlContent, 'text/html');
     } catch (error) {
       console.error('Error reading HTML file:', error);
@@ -37,9 +35,9 @@ const contentHandlers = {
       const formData = Object.fromEntries(new URLSearchParams(body));
       await handlerMethods[method](req, res, formData, 'text/plain');
     } catch (error) {
-      console.error('Error reading form-url file:', error);
+      console.error('Error reading form-urlencoded data:', error);
       res.writeHead(404, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'form-url File Not Found' }));
+      res.end(JSON.stringify({ error: 'form-urlencoded Data Not Found' }));
     }
   }
 };

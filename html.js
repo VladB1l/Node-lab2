@@ -1,3 +1,4 @@
+const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,3 +22,6 @@
 </body>
 
 </html>
+`;
+
+export default htmlContent;

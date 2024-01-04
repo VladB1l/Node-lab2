@@ -1,4 +1,5 @@
 import contentHandlers from './handler-contents.js';
+import htmlContent from './html.js';
 
 const handleRequest = async (pathname, method, req, res, contentType) => {
   try {
@@ -14,7 +15,7 @@ const handleRequest = async (pathname, method, req, res, contentType) => {
           contentHandlers[contentType](req, res, pathname.slice(1), method);
           break;
         case '/test.html':
-          contentHandlers['text/html'](req, res, 'test.html', method);
+          contentHandlers['text/html'](req, res, htmlContent, method);
           break;
         case '/package.json':
           contentHandlers['application/json'](req, res, 'package.json', method);
