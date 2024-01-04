@@ -1,24 +1,16 @@
-import { promises as fsPromises } from 'fs';
-
 const handlerMethods = {
-    GET: (req, res, text) => {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end(`Hello Node Js | ${text} page`);
+    GET: (req, res, data, contentType) => {
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(data);
     },
-    POST: (req, res, text) => {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end(`Handling Post request! | ${text} page`);
+    POST: (req, res, data, contentType) => {
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(`Handling Post request! | ${JSON.stringify(data)}`);
     },
-    OPTIONS: (req, res,) => {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end(`handlerMethods: [${Object.keys(handlerMethods)}]`);
+    OPTIONS: (req, res, text) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end(`handlerMethods: [${Object.keys(handlerMethods)}]`);
     },
-    HTML: async (req, res, filename) => {
-        const filePath = `./${filename}`;
-        const htmlContent = await fsPromises.readFile(filePath, 'utf8');
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(htmlContent);
-    },
-  };
-  
-  export default handlerMethods;
+};
+
+export default handlerMethods;
