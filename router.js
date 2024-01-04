@@ -1,29 +1,32 @@
 import contentHandlers from './handler-contents.js';
 import htmlContent from './html.js';
 
+const routes = {
+  '/': 'Main page',
+  '/post': 'post',
+  '/options': 'options',
+  '/test.html': htmlContent,
+  '/package.json': 'package.json',
+};
+
 const handleRequest = async (pathname, method, req, res, contentType) => {
   try {
     if (['GET', 'OPTIONS', 'POST'].includes(method)) {
-      switch (pathname) {
-        case '/':
-          contentHandlers[contentType](req, res, 'Main page', method);
-          break;
-        case '/post':
-          contentHandlers[contentType](req, res, pathname.slice(1), method);
-          break;
-        case '/options':
-          contentHandlers[contentType](req, res, pathname.slice(1), method);
-          break;
-        case '/test.html':
-          contentHandlers['text/html'](req, res, htmlContent, method);
-          break;
-        case '/package.json':
-          contentHandlers['application/json'](req, res, 'package.json', method);
-          break;
-        default:
-          res.writeHead(404, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Page Not Found' }));
+      const routeHandler = routes[pathname];
+      if (routeHandler) {
+        const ext = pathname.split('.').pop();
+        const defaultContentType = contentType || 'text/plain';
+        const mimeTypes = {
+          html: 'text/html',
+          json: 'application/json',
+        };
+        const resolvedContentType = mimeTypes[ext] || defaultContentType;
+        contentHandlers[resolvedContentType](req, res, routeHandler, method);
+      } else {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Page Not Found' }));
       }
+
     } else {
       res.writeHead(405, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: 'Method Not Allowed' }));
