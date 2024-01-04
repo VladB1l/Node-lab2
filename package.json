@@ -4,6 +4,9 @@
   "description": "Lab #2 Node js",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "test": " ",
     "lint": "eslint .",
